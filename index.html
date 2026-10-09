@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#064c3b">
+  <title>Waste2Power — Smart Waste & Energy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#" data-page="dashboard" aria-label="Waste2Power home">
+      <span class="brand-mark">ϟ</span>
+      <span><b>Waste<span class="brand-2">2</span>Power</b><small>Less Waste. More Energy.</small></span>
+    </a>
+    <nav class="nav-list" aria-label="Main navigation">
+      <button class="nav-link active" data-page="dashboard"><span>⌂</span> Dashboard</button>
+      <button class="nav-link" data-page="scan"><span>▣</span> Scan Waste</button>
+      <button class="nav-link" data-page="waste"><span>♻</span> My Waste</button>
+      <button class="nav-link" data-page="impact"><span>ϟ</span> Energy & Impact</button>
+      <button class="nav-link" data-page="route"><span>⌁</span> Collection Route</button>
+      <button class="nav-link" data-page="ewaste"><span>▣</span> E-Waste Guide</button>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="earth-art">🌍</div>
+      <p>Small actions<br>make a big impact.</p>
+      <span class="demo-pill">DEMO PROTOTYPE</span>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="mobile-menu" id="mobileMenu" aria-label="Toggle menu">☰</button>
+      <div>
+        <h1 id="pageTitle">Hello, Vivek 👋</h1>
+        <p id="pageSubtitle">Let's turn waste into a better tomorrow.</p>
+      </div>
+      <div class="campus-chip"><span class="pin">●</span><span><b>Campus Green Hub</b><small>Waste & energy workspace</small></span></div>
+      <div class="avatar" title="Demo profile">V</div>
+    </header>
+
+    <section class="page active-page" id="page-dashboard">
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">SMART WASTE • SMARTER FUTURE</span>
+          <h2>Track your waste.<br>Unlock its <em>energy.</em></h2>
+          <p>One simple place to classify waste, explore responsible disposal options, and estimate environmental impact.</p>
+          <button class="btn btn-lime" data-go="scan">Scan waste <span>→</span></button>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="globe">🌎</div><span class="leaf leaf-a">🌿</span><span class="leaf leaf-b">🍃</span>
+          <div class="hero-sticker">REDUCE<br>REUSE<br>RECYCLE</div>
+        </div>
+      </section>
+
+      <div class="stat-grid">
+        <article class="stat-card"><div class="stat-icon icon-green">♻</div><div><span>Total waste logged</span><strong id="statWaste">12.5 kg</strong><small class="positive">Your tracked materials</small></div></article>
+        <article class="stat-card"><div class="stat-icon icon-yellow">ϟ</div><div><span>Estimated energy potential</span><strong id="statEnergy">8.4 kWh</strong><small class="positive">Indicative estimate</small></div></article>
+        <article class="stat-card"><div class="stat-icon icon-mint">₹</div><div><span>Potential value</span><strong id="statValue">₹ 320</strong><small class="positive">Illustrative estimate</small></div></article>
+        <article class="stat-card"><div class="stat-icon icon-leaf">❧</div><div><span>Waste entries</span><strong id="statEntries">4</strong><small class="positive">Items recorded</small></div></article>
+      </div>
+
+      <div class="dashboard-grid">
+        <article class="panel composition-panel">
+          <div class="panel-heading"><div><h3>Waste composition</h3><p>Based on your logged items</p></div><span class="tiny-tag">LIVE DEMO</span></div>
+          <div class="composition-content"><div class="donut" id="donut"><div><b id="donutTotal">12.5</b><small>kg total</small></div></div><div class="legend" id="legend"></div></div>
+        </article>
+        <article class="panel recommendation-panel">
+          <div class="panel-heading"><div class="bulb">✦</div><div><h3>Smart recommendation</h3><p>Practical next step</p></div></div>
+          <h4 id="recommendationTitle">Keep food waste separate</h4>
+          <p id="recommendationText">Clean organic waste may be suitable for composting or a local biogas programme. Check local facilities before disposal.</p>
+          <button class="btn btn-dark" data-go="ewaste">Explore disposal guide <span>→</span></button>
+        </article>
+        <article class="panel activity-panel">
+          <div class="panel-heading"><div><h3>Recent activity</h3><p>Latest waste entries</p></div><button class="text-btn" data-go="waste">View all →</button></div>
+          <div id="recentActivity" class="activity-list"></div>
+        </article>
+      </div>
+      <p class="disclaimer">Prototype note: dashboard starts with sample data. Energy and value figures are illustrative estimates, not measured or verified outcomes.</p>
+    </section>
+
+    <section class="page" id="page-scan">
+      <div class="section-intro"><span class="eyebrow green-text">WASTE IDENTIFICATION</span><h2>Scan your waste</h2><p>Upload a photo, select the closest category, and save the entry to your dashboard.</p></div>
+      <div class="scan-layout">
+        <article class="panel upload-panel">
+          <div class="upload-drop" id="dropZone">
+            <div class="upload-symbol">↑</div><h3>Upload a waste photo</h3><p>Choose an image from your device. JPG, PNG, or WEBP.</p>
+            <label class="btn btn-outline file-label">Choose image<input type="file" id="imageInput" accept="image/*"></label>
+            <div class="preview-wrap hidden" id="previewWrap"><img id="imagePreview" alt="Waste photo preview"><div class="image-actions"><button id="downloadImage" class="btn btn-outline btn-small" type="button">↓ Download image</button><button id="removeImage" class="remove-image" type="button">Remove image</button></div></div>
+          </div>
+          <div class="form-grid">
+            <label>Waste category<select id="wasteCategory"><option value="Organic">Organic / Food</option><option value="Plastic">Plastic</option><option value="Paper">Paper / Cardboard</option><option value="Metal">Metal</option><option value="E-waste">E-waste / Battery</option><option value="Other">Other / Mixed</option></select></label>
+            <label>Weight (kg)<input type="number" id="wasteWeight" min="0.01" max="10000" step="0.01" value="0.5" required></label>
+            <label class="full-field">Short description<input type="text" id="wasteDescription" maxlength="80" placeholder="e.g. empty water bottle"></label>
+          </div>
+          <button class="btn btn-primary wide-btn" id="analyzeBtn">Save Waste Entry entry <span>→</span></button>
+          <p class="form-hint">This prototype uses your selected category and a transparent demo estimate. It does not run a real image-recognition model.</p>
+        </article>
+        <article class="panel result-panel">
+          <div class="panel-heading"><div><h3>Analysis result</h3><p>Result appears after you save an entry</p></div><span class="status-dot"></span></div>
+          <div class="empty-result" id="emptyResult"><div class="result-illustration">♻</div><h3>Ready when you are</h3><p>Upload a photo, choose a category, then analyze your item.</p></div>
+          <div class="result-content hidden" id="resultContent">
+            <div class="result-category"><span id="resultEmoji">🍃</span><div><small>DETECTED CATEGORY</small><h3 id="resultCategory">Organic</h3><p id="resultDescription">Food scraps</p></div></div>
+            <div class="result-metrics"><div><small>Weight</small><b id="resultWeight">0.5 kg</b></div><div><small>Indicative energy</small><b id="resultEnergy">0.2 kWh</b></div></div>
+            <div class="advice-box"><b>Recommended next step</b><p id="resultAdvice">Keep organic waste separate for composting or check local biogas collection options.</p></div>
+            <div class="success-message">✓ Entry saved to My Waste and dashboard totals.</div>
+            <button class="btn btn-outline wide-btn" data-go="waste">View my waste log →</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="page" id="page-waste">
+      <div class="section-intro row-between"><div><span class="eyebrow green-text">YOUR RECORDS</span><h2>My waste</h2><p>Review and manage the items recorded in this browser.</p></div><button class="btn btn-primary" data-go="scan">+ Add waste</button></div>
+      <article class="panel table-panel"><div class="table-toolbar"><div><h3>Waste log</h3><p id="tableCount">4 entries</p></div><button class="btn btn-outline btn-small" id="resetDemo">Reset sample data</button></div>
+        <div class="table-scroll"><table><thead><tr><th>Item</th><th>Category</th><th>Weight</th><th>Energy estimate</th><th>Disposal route</th><th></th></tr></thead><tbody id="wasteTable"></tbody></table></div>
+        <p class="form-hint">Entries are stored locally in this browser using localStorage. No account or cloud database is connected.</p>
+      </article>
+    </section>
+
+    <section class="page" id="page-impact">
+      <div class="section-intro"><span class="eyebrow green-text">MEASURE THE DIFFERENCE</span><h2>Energy & impact</h2><p>Explore indicative estimates based on the waste you log.</p></div>
+      <div class="impact-stats stat-grid">
+        <article class="stat-card"><div class="stat-icon icon-yellow">ϟ</div><div><span>Energy potential</span><strong id="impactEnergy">8.4 kWh</strong><small>Modelled estimate</small></div></article>
+        <article class="stat-card"><div class="stat-icon icon-green">♻</div><div><span>Waste tracked</span><strong id="impactWaste">12.5 kg</strong><small>All categories</small></div></article>
+        <article class="stat-card"><div class="stat-icon icon-mint">₹</div><div><span>Potential material value</span><strong id="impactValue">₹ 320</strong><small>Illustrative only</small></div></article>
+      </div>
+      <article class="panel chart-panel"><div class="panel-heading"><div><h3>Weight by category</h3><p>Updates when you add or delete entries</p></div><span class="tiny-tag">KG</span></div><div id="barChart" class="bar-chart"></div></article>
+      <article class="panel simulator-panel">
+        <div class="panel-heading"><div><h3>Waste-to-Energy Simulator</h3><p>Try a scenario before logging waste</p></div><span class="tiny-tag">INTERACTIVE DEMO</span></div>
+        <div class="simulator-grid">
+          <label>Waste type<select id="simCategory"><option value="Organic">Organic / food</option><option value="Plastic">Plastic</option><option value="Paper">Paper / cardboard</option><option value="Metal">Metal</option><option value="E-waste">E-waste / battery</option><option value="Other">Other / mixed</option></select></label>
+          <label>Quantity (kg)<input id="simWeight" type="number" min="0.01" max="10000" step="0.1" value="10"></label>
+          <button class="btn btn-primary" id="simCalculate" type="button">Calculate estimate →</button>
+        </div>
+        <div class="simulator-results" aria-live="polite">
+          <div><small>Indicative energy</small><strong id="simEnergy">2.5 kWh</strong></div>
+          <div><small>Indicative material value</small><strong id="simValue">₹ 30</strong></div>
+          <div><small>Suggested pathway</small><strong id="simRoute">Compost / biogas</strong></div>
+        </div>
+        <p class="form-hint" id="simNote">Demo estimate only. These coefficients are illustrative, not validated energy-yield data. E-waste is routed to authorised handling rather than energy conversion.</p>
+      </article>
+      <article class="panel methodology"><h3>How estimates work</h3><p>For this prototype, each category uses a simple illustrative coefficient to demonstrate how the interface could calculate potential energy. Real-world energy recovery depends on material quality, collection method, local processing technology, and conversion efficiency. The values should be replaced with verified local data before deployment.</p></article>
+    </section>
+
+    <section class="page" id="page-route">
+      <div class="section-intro"><span class="eyebrow green-text">COLLECT SMARTER</span><h2>Collection route</h2><p>A concept view for prioritising bins and reducing unnecessary collection trips.</p></div>
+      <div class="route-layout">
+        <article class="panel route-map-panel"><div class="panel-heading"><div><h3>Campus collection map</h3><p>Illustrative locations — not live GPS</p></div><span class="tiny-tag">CONCEPT</span></div>
+          <div class="illustrative-map"><div class="map-road road-a"></div><div class="map-road road-b"></div><div class="map-road road-c"></div><div class="route-path"></div><span class="map-pin pin-a">♻<small>Block A</small></span><span class="map-pin pin-b">🍃<small>Canteen</small></span><span class="map-pin pin-c">▣<small>Library</small></span><span class="map-pin pin-d">🚚<small>Collection</small></span></div>
+          <div class="map-legend"><span><i class="red-dot"></i>Needs pickup</span><span><i class="yellow-dot"></i>Partially full</span><span><i class="green-dot"></i>Available</span></div>
+        </article>
+        <article class="panel route-side"><h3>Bin status</h3><p class="muted">Example campus data</p><div class="bin-row"><span class="bin-emoji">🗑️</span><div><b>Block A — Dry waste</b><small>Needs collection</small><div class="progress"><i style="width:92%"></i></div></div><strong>92%</strong></div><div class="bin-row"><span class="bin-emoji">🍃</span><div><b>Canteen — Organic</b><small>Partially full</small><div class="progress yellow-progress"><i style="width:65%"></i></div></div><strong>65%</strong></div><div class="bin-row"><span class="bin-emoji">♻️</span><div><b>Library — Paper</b><small>Available</small><div class="progress green-progress"><i style="width:28%"></i></div></div><strong>28%</strong></div><div class="route-summary"><b>Suggested action</b><p>Prioritise Block A first, then check the canteen bin. Confirm bin status with campus staff before dispatch.</p></div></article>
+      </div>
+      <p class="disclaimer">No live sensors, GPS, route optimisation service, or collection dispatch is connected in this demo.</p>
+    </section>
+
+    <section class="page" id="page-ewaste">
+      <div class="section-intro"><span class="eyebrow green-text">DISPOSE RESPONSIBLY</span><h2>E-waste & recycling guide</h2><p>Choose the right next step for common waste types.</p></div>
+      <div class="guide-grid">
+        <article class="guide-card"><div class="guide-icon">🍌</div><span class="guide-label">ORGANIC</span><h3>Food & garden waste</h3><p>Keep food scraps separate from plastic and other dry waste. Use a composting or authorised organic-waste service if available.</p><div class="guide-action">Best route <b>Compost / local biogas</b></div></article>
+        <article class="guide-card"><div class="guide-icon">🧴</div><span class="guide-label">PLASTIC</span><h3>Bottles & packaging</h3><p>Empty and rinse containers when appropriate. Follow local recycling rules because accepted plastic types vary by facility.</p><div class="guide-action">Best route <b>Accepted recycling stream</b></div></article>
+        <article class="guide-card"><div class="guide-icon">📄</div><span class="guide-label">PAPER</span><h3>Paper & cardboard</h3><p>Keep dry and separate from food residue. Flatten boxes to reduce storage and transport volume.</p><div class="guide-action">Best route <b>Paper recycling</b></div></article>
+        <article class="guide-card"><div class="guide-icon">🥫</div><span class="guide-label">METAL</span><h3>Cans & scrap metal</h3><p>Separate clean metal items and use an appropriate scrap dealer or recycling collection point.</p><div class="guide-action">Best route <b>Metal recycler</b></div></article>
+        <article class="guide-card warning-card"><div class="guide-icon">🔋</div><span class="guide-label">SPECIAL HANDLING</span><h3>Batteries & electronics</h3><p>Do not place batteries or electronics in ordinary mixed waste. Avoid dismantling batteries; use an authorised e-waste collection point or take-back programme.</p><div class="guide-action">Best route <b>Authorised e-waste handler</b></div></article>
+        <article class="guide-card"><div class="guide-icon">🧺</div><span class="guide-label">MIXED</span><h3>Uncertain materials</h3><p>If you're unsure what an item is made from, keep it separate until you can check local disposal guidance.</p><div class="guide-action">Best route <b>Check local guidance</b></div></article>
+      </div>
+    </section>
+
+    <footer class="app-footer"><span>Waste2Power • Hackathon prototype</span><span>Build small. Measure impact. Improve locally.</span></footer>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="script.js"></script>
+</body>
+</html>
